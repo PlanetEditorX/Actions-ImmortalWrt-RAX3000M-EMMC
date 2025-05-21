@@ -213,8 +213,6 @@ jobs:
       if: github.event.inputs.EEPROM == 'true'
       run: |
         cd openwrt
-        # 创建dl目录（如果不存在）
-        mkdir -p dl
         wifi_driver=$(echo "${{ github.event.inputs.WIFI_DRIVER }}" | sed -E 's/^(v[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/\1/')
         if [ "$wifi_driver" == "v7.6.6.1" ]; then
                 cp $GITHUB_WORKSPACE/RAX3000M-eMMC_XR30-eMMC-hanwckf/mt79xx_20220907-8b55f5_eeprom.tar.xz dl/mt79xx_20220907-8b55f5.tar.xz
