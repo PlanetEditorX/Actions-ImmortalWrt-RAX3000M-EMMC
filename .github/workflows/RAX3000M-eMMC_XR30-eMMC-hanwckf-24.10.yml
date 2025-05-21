@@ -136,10 +136,16 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
+        echo "新源码目录结构"
         ls -l /workdir/openwrt
+        echo "适配源码目录结构"
         ls -l /workdir/openwrt_mt798x
-        cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_1 /workdir/openwrt/$MOVE_FOLDER_1 
+        echo "移植适配源码$MOVE_FOLDER_1"
+        cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_1 /workdir/openwrt/$MOVE_FOLDER_1
+        ls -l /workdir/openwrt/$MOVE_FOLDER_1
+        echo "移植适配源码$MOVE_FOLDER_2"
         cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_2 /workdir/openwrt/$MOVE_FOLDER_2
+        ls -l /workdir/openwrt/$MOVE_FOLDER_2
         
     - name: 加载feeds.conf.default & DIY_P1_SH
       run: |
