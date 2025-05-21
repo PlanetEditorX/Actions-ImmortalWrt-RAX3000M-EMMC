@@ -158,12 +158,6 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
-    # - name: 配置集客AC
-    #   run: |
-    #     cd openwrt
-    #     # 下载源码
-    #     git clone https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
-
     - name: 更新 & 安装 feeds
       run: |
         cd openwrt
