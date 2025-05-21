@@ -294,6 +294,21 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
+    - name: 查看目录情况
+      if: (!cancelled())
+      run: |
+        sudo apt update
+        apt install tree
+        tree -l openwrt
+        tree -l openwrt/bin/targets
+
+    - name: Upload OpenWrt Firmware
+      uses: actions/upload-artifact@v4
+      with:
+        name: openwrt-firmware
+        path: openwrt/bin/targets/*/*/*
+        retention-days: 7
+
     - name: 整理文件并重命名
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
