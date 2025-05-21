@@ -67,6 +67,8 @@ env:
   UPLOAD_TAG_NAME: rax3000m-emmc_xr30-emmc
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-24.10
+  REPO_URL_mt798x: https://github.com/hanwckf/immortalwrt-mt798x
+  REPO_BRANCH_mt798x: openwrt-21.02
   # FEEDS_CONF: RAX3000M-eMMC_XR30-eMMC-hanwckf/feeds.conf.default
   RAX3000M_EMMC_DTS_FILE:  target/linux/mediatek/dts/mt7981b-cmcc-rax3000m-emmc.dtso
   # CONFIG_FILE: RAX3000M-eMMC_XR30-eMMC-hanwckf/.mtwifi-cfg.config
@@ -77,6 +79,8 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
+  MOVE_FOLDER_1: dl
+  MOVE_FOLDER_2: target/linux/mediatek/mt7981
 
 jobs:
   build:
@@ -121,9 +125,22 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
+        echo "下载最新源码"
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        echo "下载适配源码"
+        git clone $REPO_URL_mt798x -b $REPO_BRANCH_mt798x openwrt_mt798x
+        ln -sf /workdir/openwrt_mt798x $GITHUB_WORKSPACE/openwrt_mt798x
 
+    - name: 移植源码
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        ls -l /workdir/openwrt
+        ls -l /workdir/openwrt_mt798x
+        cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_1 /workdir/openwrt/$MOVE_FOLDER_1 
+        cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_2 /workdir/openwrt/$MOVE_FOLDER_2
+        
     - name: 加载feeds.conf.default & DIY_P1_SH
       run: |
         # [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
