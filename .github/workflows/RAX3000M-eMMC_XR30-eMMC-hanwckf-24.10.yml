@@ -146,6 +146,10 @@ jobs:
         echo "移植适配源码$MOVE_FOLDER_2"
         cp -r /workdir/openwrt_mt798x/$MOVE_FOLDER_2 /workdir/openwrt/$MOVE_FOLDER_2
         ls -l /workdir/openwrt/$MOVE_FOLDER_2
+        echo "清理空间..."
+        rm -rf /workdir/openwrt_mt798x
+         echo "当前空间"
+        df -h
         
     - name: 加载feeds.conf.default & DIY_P1_SH
       run: |
