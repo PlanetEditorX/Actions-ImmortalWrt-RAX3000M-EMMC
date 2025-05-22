@@ -241,6 +241,10 @@ jobs:
         cd openwrt
         sed -i '/CONFIG_PACKAGE_luci-app-dockerman is not set/CONFIG_PACKAGE_luci-app-dockerman=y/g' .config
 
+    - name: 校验config
+      run: |
+        ls -l ${{ github.workspace }}/openwrt/.config
+
     - name: SSH链接管理
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
@@ -249,7 +253,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: custom-config
-        path: openwrt/.config
+        path: ${{ github.workspace }}/openwrt/.config
         retention-days: 7
         
     - name: 下载安装包
