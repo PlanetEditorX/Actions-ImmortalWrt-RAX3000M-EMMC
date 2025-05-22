@@ -245,19 +245,11 @@ jobs:
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
 
-    - name: 校验config
-      run: |
-        ls -l openwrt/.config
-  
-    - name: 备份config
-      run: |
-        cp openwrt/.config  ../backup_config
-        
     - name: Upload Config
       uses: actions/upload-artifact@v4
       with:
-        name: custom-config
-        path: backup_config
+        name: upload-openwrt
+        path: openwrt/
         retention-days: 7
         
     - name: 下载安装包
