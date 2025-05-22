@@ -244,10 +244,14 @@ jobs:
     - name: SSH链接管理
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
+    - name: Upload Config
+      uses: actions/upload-artifact@v4
+      with:
+        name: custom-config
+        path: openwrt/.config
+        retention-days: 7
+        
     - name: 下载安装包
       id: package
       run: |
@@ -298,7 +302,11 @@ jobs:
       if: (!cancelled())
       run: |
         tree -l openwrt/bin/targets
-
+  
+    - name: SSH链接管理
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      
     - name: Upload OpenWrt Firmware
       uses: actions/upload-artifact@v4
       with:
