@@ -131,6 +131,7 @@ jobs:
         echo "下载适配源码"
         git clone $REPO_URL_mt798x -b $REPO_BRANCH_mt798x openwrt_mt798x
         ln -sf /workdir/openwrt_mt798x $GITHUB_WORKSPACE/openwrt_mt798x
+        tree -l openwrt
 
     - name: 移植源码
       working-directory: /workdir
@@ -297,8 +298,6 @@ jobs:
     - name: 查看目录情况
       if: (!cancelled())
       run: |
-        sudo apt update
-        apt install tree
         tree -l openwrt
         tree -l openwrt/bin/targets
 
