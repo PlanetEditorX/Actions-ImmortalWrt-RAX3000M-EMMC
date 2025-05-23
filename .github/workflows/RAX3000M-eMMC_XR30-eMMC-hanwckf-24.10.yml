@@ -72,7 +72,7 @@ env:
   # FEEDS_CONF: RAX3000M-eMMC_XR30-eMMC-hanwckf/feeds.conf.default
   RAX3000M_EMMC_DTS_FILE:  target/linux/mediatek/dts/mt7981b-cmcc-rax3000m-emmc.dtso
   # CONFIG_FILE: RAX3000M-eMMC_XR30-eMMC-hanwckf/.mtwifi-cfg.config
-  CONFIG_FILE: RAX3000M-eMMC_XR30-eMMC-hanwckf/custom.config
+  CONFIG_FILE: RAX3000M-eMMC_XR30-eMMC-hanwckf/24.10.config
   DIY_P1_SH: RAX3000M-eMMC_XR30-eMMC-hanwckf/diy-part1.sh
   DIY_P2_SH: RAX3000M-eMMC_XR30-eMMC-hanwckf/diy-part3.sh
   SSH_ACTIONS: false
